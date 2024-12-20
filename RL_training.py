@@ -27,11 +27,12 @@ env = OT2Env(render=False)
 
 run = wandb.init(project="sb3_RL_OT2",sync_tensorboard=True)
 
-model = PPO('MlpPolicy', env, verbose=1, 
+model = PPO(args.policy, env, verbose=1, 
             learning_rate=args.learning_rate, 
             batch_size=args.batch_size, 
             n_steps=args.n_steps, 
             n_epochs=args.n_epochs, 
+            gamma=args.gamma,
             tensorboard_log=f"runs/{run.id}",)
 
 wandb_callback = WandbCallback(model_save_freq=1000,
